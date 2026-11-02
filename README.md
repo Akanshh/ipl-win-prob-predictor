@@ -29,7 +29,7 @@ You enter the match situation, and the model returns the win and loss probabilit
 
 - Python
 - Pandas, NumPy
-- Scikit-learn pipeline with [XGBoost]
+- Scikit-learn pipeline with [Logistic Regression]
 - Streamlit (UI and deployment)
 
 ## Run locally
