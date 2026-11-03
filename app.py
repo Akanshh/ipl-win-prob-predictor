@@ -61,4 +61,25 @@ if st.button('predict_probability'):
     else:
         runs_left = target - score
         balls_left = 120 - (overs) * 6
-        wickets = 10 -
+        wickets = 10 - wickets
+        crr = score / overs
+        rrr = (runs_left * 6) / balls_left
+
+        input_df = pd.DataFrame({
+            'batting_team': [batting_team],
+            'bowling_team': [bowling_team],
+            'city': [selected_city],
+            'runs_left': [runs_left],
+            'balls_left': [balls_left],
+            'wickets': [wickets],
+            'total_runs_x': [target],
+            'crr': [crr],
+            'rrr': [rrr]
+        })
+
+        result = pipe.predict_proba(input_df)
+        loss = result[0][0]
+        win = result[0][1]
+
+        st.header(batting_team + "-" + str(round(win * 100)) + "%")
+        st.header(bowling_team + "-" + str(round(loss * 100)) + "%")
