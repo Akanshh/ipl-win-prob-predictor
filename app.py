@@ -52,12 +52,14 @@ if st.button('predict_probability'):
         st.warning("Please enter a target greater than 0.")
     elif overs <= 0:
         st.warning("Overs completed must be greater than 0.")
-    elif overs >= 20:
-        st.warning("Overs completed must be less than 20 (the chase should still be in progress).")
-    elif score >= target:
-        st.success(batting_team + " has already won the match!")
-    elif wickets >= 10:
-        st.error(batting_team + " is all out. " + bowling_team + " wins!")
+    elif score > target:
+        st.success(batting_team + " has won the match! 🎉")
+    elif overs >= 20 or wickets >= 10:
+        # innings is over, so show the final result
+        if score == target:
+            st.info("Match tied! It goes to a Super Over. 🤝")
+        else:
+            st.error(bowling_team + " has won the match! 🎉")
     else:
         runs_left = target - score
         balls_left = 120 - (overs) * 6
